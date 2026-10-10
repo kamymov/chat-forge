@@ -1,6 +1,5 @@
 const { searchKnowledge } = require("../../infra/chroma/chroma.client");
 const { chat } = require("../../infra/ollama/ollama.client");
-const { search } = require("../../repository/chroma/chroma.repository");
 
 async function messageHandler(socket, message) {
     const embeddedMessages = await searchKnowledge(message);

@@ -29,10 +29,7 @@ async function getKnowledgeCollection() {
 
 async function addKnowledge(ids, documents) {
     const collection = await getKnowledgeCollection();
-    console.log("documents", documents)
     const embeddings = await embed(documents);
-
-    console.log("embedding", embeddings)
 
     await collection.upsert({
         ids,
