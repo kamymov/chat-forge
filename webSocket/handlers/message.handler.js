@@ -10,6 +10,7 @@ function emitMessage(socket, message, eventName = "message") {
 }
 
 async function messageHandler(socket, message) {
+    if (!message) return;
     const embeddedMessages = await searchKnowledge(message);
     const messages = [
         {
@@ -32,7 +33,7 @@ async function messageHandler(socket, message) {
         }
     ];
     const messageResponse = await chat(messages);
-    emitMessage(socket, messageResponse)
+    emitMessage(socket, messageResponse);
 }
 
 
