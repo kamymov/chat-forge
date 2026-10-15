@@ -1,4 +1,4 @@
-const { getKnowledgeCollection, addKnowledge } = require("../infra/chroma/chroma.client");
+const { getKnowledgeCollection, addKnowledge } = require("../../infra/chroma/chroma.client");
 const { randomUUID } = require("node:crypto");
 
 async function createDocument(req, res) {
