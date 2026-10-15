@@ -1,6 +1,7 @@
 const { Server } = require("socket.io");
 const { MemoryCache } = require("../infra/cache/memory.cache");
-const { messageHandler } = require("./handlers/message.handler");
+const { messageHandler, emitMessage } = require("./handlers/message.handler");
+const { getChromaDbHealthCheck } = require("../infra/chroma/chroma.client");
 
 class SocketServer {
     constructor(httpServer) {
@@ -16,13 +17,13 @@ class SocketServer {
 
     setup() {
         this.io.on("connection", async (socket) => {
-
-            socket.emit("message", {
-                message: "Hi i am a ai assist"
-            });
-
+            const healthCheck = await getChromaDbHealthCheck();
+            if (!healthCheck) {
+                emitMessage(socket, "در حال حاظر امکان ارتباط با دستیار وجود ندارد");
+                socket.disconnect(true);
+            }
+            emitMessage(socket, "سلام. چطوری میتوانم کمکتان کنم؟")
             socket.on("message", (message) => messageHandler(socket, message?.message));
-
             socket.on("disconnect", () => {
                 console.log(`Client disconnected: ${socket.id}`);
             });

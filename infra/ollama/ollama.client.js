@@ -10,6 +10,17 @@ async function chat(messages) {
     return response.message.content;
 }
 
+async function embed(texts) {
+    const response = await ollama.default.embed({
+        model: EnvConfig.ollamaEmbeddingModel,
+        input: texts,
+    });
+
+    return response.embeddings;
+}
+
+
 module.exports = {
-    chat
+    chat,
+    embed
 }
