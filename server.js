@@ -4,7 +4,7 @@ const dotenv = require("dotenv")
 dotenv.config({ config: __dirname + ".env" });
 const { EnvConfig } = require("./infra/config/dotEnv");
 const { SocketServer } = require("./webSocket/socket.server");
-const { chatPrivateRoutes } = require("./routes/routes");
+const { chatPrivateRoutes } = require("./http/routes/routes");
 const app = express();
 
 app.use(bodyParser.json());
