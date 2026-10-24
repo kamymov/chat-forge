@@ -1,10 +1,11 @@
 
 const { ChromaClient } = require("chromadb");
+const { EnvConfig } = require("../config/dotEnv");
 
 
 const chroma = new ChromaClient({
-    host: process.env.CHROMA_URL_HOST,
-    port: process.env.CHROMA_PORT
+    host: EnvConfig.ollamaHost,
+    port: EnvConfig.ollamaPort
 });
 
 async function getChromaDbHealthCheck() {
