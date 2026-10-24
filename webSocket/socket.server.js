@@ -19,6 +19,7 @@ class SocketServer {
         this.io.on("connection", async (socket) => {
             const healthCheck = await getChromaDbHealthCheck();
             if (!healthCheck) {
+                console.error("Cannot Access to Chroma DB");
                 emitMessage(socket, "در حال حاظر امکان ارتباط با دستیار وجود ندارد");
                 socket.disconnect(true);
             }
